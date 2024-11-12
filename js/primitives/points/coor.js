@@ -4,8 +4,7 @@ class Coor {
         this.y = y;
     }
 
-    draw(ctx, color = 'black') {
-        let r = 2;
+    draw(ctx, {color = 'white', r = 2}) {
         ctx.beginPath();
         ctx.fillStyle = color;
         ctx.arc(this.x, this.y, r, 0, Math.PI * 2);

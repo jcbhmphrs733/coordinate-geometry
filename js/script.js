@@ -7,8 +7,8 @@ myCanvas.height = 650;
 
 const circle1 = new PtRCircle(new Coor(0,0), 100);  
 const ctrl_pt = new Coor(0,5);
-const midLine = new LineSegment(circle1.origin, ctrl_pt)
-const targetPt = new Coor(Math.random()*myCanvas.width-(myCanvas.width/2),Math.random()*myCanvas.width-(myCanvas.width/2))
+const midLine = new LineSegment(circle1.origin, ctrl_pt);
+const targetPt = new Coor(0,0);
 
 ctx.translate(myCanvas.width / 2, myCanvas.height / 2);
 ctx.scale(1, -1);
@@ -22,8 +22,7 @@ document.getElementById("maxX").innerText = `X +${myCanvas.width / 2}`;
 function updateCanvas() {
     ctx.clearRect(-myCanvas.width/2, -myCanvas.height/2, myCanvas.width, myCanvas.height);
     
-    let color = 'red' 
-    // 'rgb(255,255,0)'
+    let color = 'rgb(100,125,50)'
     
     const threshold = 5; 
     const easingFactor = .015;
@@ -32,9 +31,8 @@ function updateCanvas() {
         do {
             targetPt.x = Math.random() * myCanvas.width - myCanvas.width / 2;
             targetPt.y = Math.random() * myCanvas.height - myCanvas.height / 2;
-        } while (pt2pt_dist(targetPt,circle1.origin) <= circle1.r + 15)
+        } while (pt2pt_dist(targetPt,circle1.origin) <= circle1.r + 15 || pt2pt_dist(targetPt, circle1.origin) >= circle1.r + 150)
     }
-
     ctrl_pt.x += (targetPt.x - ctrl_pt.x) * easingFactor;
     ctrl_pt.y += (targetPt.y - ctrl_pt.y) * easingFactor;
     
@@ -48,17 +46,17 @@ function updateCanvas() {
         let c2tanB = new LineSegment(circle1.origin, tanPair.p2);
         let a2bLine = new LineSegment(tanPair.p1, tanPair.p2);
         
-        cPCircle.draw(ctx, color);
-        tanLine1.draw(ctx, color);
-        tanLine2.draw(ctx, color);
-        c2tanA.draw(ctx, color);
-        c2tanB.draw(ctx, color);
-        a2bLine.draw(ctx, color, {dashed : true})
+        cPCircle.draw(ctx, {color : `${color}`});
+        tanLine1.draw(ctx, {color : "red"});
+        tanLine2.draw(ctx, {color : "red"});
+        // c2tanA.draw(ctx, {color : "red"});
+        // c2tanB.draw(ctx, {color : "red"});
+        a2bLine.draw(ctx, {color : "red", dashed : true})
     }
     
-    circle1.draw(ctx, color);
-    ctrl_pt.draw(ctx, color);
-    targetPt.draw(ctx, color);
+    circle1.draw(ctx, {color : "red"});
+    ctrl_pt.draw(ctx, {color : "red"});
+    targetPt.draw(ctx, {color : "red"});
     // midLine.draw(ctx, color);
 }
 

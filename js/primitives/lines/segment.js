@@ -10,25 +10,18 @@ class LineSegment {
         this.solution = this.vertical? p1.x : (-this.slope * p1.x) + p1.y;
         };
     
-    draw(ctx, color = 'black', dashed = false) {
+    draw(ctx, {color = 'white', lineWidth = .75, dashed = false}) {
         ctx.beginPath();
         if (dashed) {
             ctx.setLineDash([5,10]);
         }
-        ctx.lineWidth = 1.75;
+        ctx.lineWidth = lineWidth;
         ctx.strokeStyle = color;
         ctx.moveTo(this.p1.x, this.p1.y);
         ctx.lineTo(this.p2.x, this.p2.y);
         ctx.stroke();
-        let r = 2
-        ctx.beginPath();
-        ctx.fillStyle = color;
-        ctx.arc(this.p1.x, this.p1.y, r, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.fillStyle = color;
-        ctx.arc(this.p2.x, this.p2.y, r, 0, Math.PI * 2);
-        ctx.fill();
+        this.p1.draw(ctx, {color : color} )
+        this.p2.draw(ctx, {color : color} )
         ctx.setLineDash([]);
     }
 }  

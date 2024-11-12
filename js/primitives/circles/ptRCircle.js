@@ -5,11 +5,15 @@ class PtRCircle {
         this.r = r;
     }
 
-    draw(ctx, color = 'black') {
+    draw(ctx, {color = 'white', lineWidth = .75, dashed = false}) {
         ctx.beginPath();
-        ctx.lineWidth = 1.75
+        if (dashed) {
+            ctx.setLineDash([5,10]);
+        }
+        ctx.lineWidth = lineWidth
         ctx.strokeStyle = color;
         ctx.arc(this.origin.x, this.origin.y, this.r, 0, Math.PI * 2);
         ctx.stroke();
+        this.origin.draw(ctx, {color : color})
     }
 }
