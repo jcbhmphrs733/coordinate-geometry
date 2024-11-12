@@ -1,10 +1,10 @@
-export class Coor {
+class Coor {
     constructor(x, y) {
         this.x = x;
         this.y = y;
     }
 
-    draw(ctx, color) {
+    draw(ctx, color = 'black') {
         let r = 2;
         ctx.beginPath();
         ctx.fillStyle = color;

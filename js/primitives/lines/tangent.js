@@ -1,8 +1,4 @@
-import {pt2pt_dist} from "/js/math/pt2pt_dist.js"
-import {Coor} from "/js/primitives/coor.js"
-import {LineSegment} from "/js/primitives/lines/segment.js"
-
-export class TangentPair {
+class TangentPair {
     constructor(circle, pt) {
         
         const d = pt2pt_dist(circle.origin, pt)

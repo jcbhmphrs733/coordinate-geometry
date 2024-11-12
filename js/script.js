@@ -1,21 +1,14 @@
-import {pt2pt_dist} from "/js/math/pt2pt_dist.js" 
-
-import {LineSegment} from "/js/primitives/lines/segment.js"
-import {TangentPair} from "/js/primitives/lines/tangent.js"
-import {PtRCircle} from "/js/primitives/circles/ptRCircle.js"
-import {Coor} from "/js/primitives/coor.js"
-
 let myCanvas = document.getElementById('myCanvas');
 let ctx = myCanvas.getContext('2d');
 
-myCanvas.width = 500;
-myCanvas.height = 400;
+myCanvas.width = 1100;
+myCanvas.height = 650;
 
 
 const circle1 = new PtRCircle(new Coor(0,0), 100);  
-const ctrl_pt = new Coor(200,0);
+const ctrl_pt = new Coor(0,5);
 const midLine = new LineSegment(circle1.origin, ctrl_pt)
-const targetPt = new Coor(100,100)
+const targetPt = new Coor(Math.random()*myCanvas.width-(myCanvas.width/2),Math.random()*myCanvas.width-(myCanvas.width/2))
 
 ctx.translate(myCanvas.width / 2, myCanvas.height / 2);
 ctx.scale(1, -1);
@@ -29,30 +22,33 @@ document.getElementById("maxX").innerText = `X +${myCanvas.width / 2}`;
 function updateCanvas() {
     ctx.clearRect(-myCanvas.width/2, -myCanvas.height/2, myCanvas.width, myCanvas.height);
     
-    let color = 'rgb(255,100,150)'
+    let color = 'red' 
+    // 'rgb(255,255,0)'
     
     const threshold = 5; 
-    const easingFactor = .03;
+    const easingFactor = .015;
     
     if (pt2pt_dist(ctrl_pt, targetPt) < threshold) { 
         do {
             targetPt.x = Math.random() * myCanvas.width - myCanvas.width / 2;
             targetPt.y = Math.random() * myCanvas.height - myCanvas.height / 2;
-        } while (pt2pt_dist(targetPt,circle1.origin) <= circle1.r + 20)
+        } while (pt2pt_dist(targetPt,circle1.origin) <= circle1.r + 15)
     }
 
     ctrl_pt.x += (targetPt.x - ctrl_pt.x) * easingFactor;
     ctrl_pt.y += (targetPt.y - ctrl_pt.y) * easingFactor;
     
     if (pt2pt_dist(circle1.origin, ctrl_pt) >= circle1.r) {
-        let tanPair = new TangentPair(circle1, ctrl_pt)
+        let tanPair = new TangentPair(circle1, ctrl_pt);
+        let cPCircle = new CPCircle(circle1.origin, targetPt, ctrl_pt);
 
-        let tanLine1 = tanPair.tanLine1
-        let tanLine2 = tanPair.tanLine2
-        let c2tanA = new LineSegment(circle1.origin, tanPair.p1)
-        let c2tanB = new LineSegment(circle1.origin, tanPair.p2)
+        let tanLine1 = tanPair.tanLine1;
+        let tanLine2 = tanPair.tanLine2;
+        let c2tanA = new LineSegment(circle1.origin, tanPair.p1);
+        let c2tanB = new LineSegment(circle1.origin, tanPair.p2);
         let a2bLine = new LineSegment(tanPair.p1, tanPair.p2);
         
+        cPCircle.draw(ctx, color);
         tanLine1.draw(ctx, color);
         tanLine2.draw(ctx, color);
         c2tanA.draw(ctx, color);
@@ -63,7 +59,7 @@ function updateCanvas() {
     circle1.draw(ctx, color);
     ctrl_pt.draw(ctx, color);
     targetPt.draw(ctx, color);
-    midLine.draw(ctx, color);
+    // midLine.draw(ctx, color);
 }
 
 function animate() {
