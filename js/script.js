@@ -11,13 +11,16 @@ const midLine = new LineSegment(circle1.origin, ctrl_pt);
 const targetPt = new Coor(60,60);
 const targetPt2 = new Coor(100,100);
 
+const threshold = 15; 
+const easingFactor = .010;
+
 ctx.translate(myCanvas.width / 2, myCanvas.height / 2);
 ctx.scale(1, -1);
 
-document.getElementById("minY").innerText = `Y -${myCanvas.height / 2}`;
-document.getElementById("maxY").innerText = `Y +${myCanvas.height / 2}`;
-document.getElementById("minX").innerText = `X -${myCanvas.width / 2}`;
-document.getElementById("maxX").innerText = `X +${myCanvas.width / 2}`;
+// document.getElementById("minY").innerText = `Y -${myCanvas.height / 2}`;
+// document.getElementById("maxY").innerText = `Y +${myCanvas.height / 2}`;
+// document.getElementById("minX").innerText = `X -${myCanvas.width / 2}`;
+// document.getElementById("maxX").innerText = `X +${myCanvas.width / 2}`;
 
 
 function handlePtInCircle(color) {
@@ -43,19 +46,12 @@ function updateCanvas() {
     
     let cPCircle = new CPCircle(circle1.origin, targetPt, ctrl_pt);
     cPCircle.draw(ctx, {color : `${color}`});
-    const threshold = 15; 
-    const easingFactor = .010;
     
     if (pt2pt_dist(targetPt, targetPt2) < threshold) { 
         do {
             targetPt2.x = Math.random() * myCanvas.width - myCanvas.width / 2;
             targetPt2.y = Math.random() * myCanvas.height - myCanvas.height / 2;
         } while (pt2pt_dist(targetPt2,circle1.origin) <= circle1.r + 15 || pt2pt_dist(targetPt2, circle1.origin) >= circle1.r + 200)
-        // do {
-        //     targetPt.x += (targetPt2.x - targetPt.x) * easingFactor
-        //     targetPt.y += (targetPt2.y - targetPt.y) * easingFactor
-
-        // } while (pt2pt_dist(targetPt, ctrl_pt) < 5 * threshold)
         }
 
         targetPt.x += (targetPt2.x - targetPt.x) * easingFactor
@@ -66,11 +62,11 @@ function updateCanvas() {
         if (pt2pt_dist(circle1.origin, ctrl_pt) >= circle1.r) {
             handlePtInCircle(color)
         }
-        circle1.draw(ctx, {color : "red"});
-        ctrl_pt.draw(ctx, {color : "red"});
-        targetPt.draw(ctx, {color : "green"});
-        targetPt2.draw(ctx, {color : "white"});
-    // midLine.draw(ctx, color);
+        circle1.draw(ctx, color);
+        ctrl_pt.draw(ctx, color);
+        targetPt.draw(ctx, color);
+        targetPt2.draw(ctx, color);
+        midLine.draw(ctx, color);
 }
 
 function animate() {
