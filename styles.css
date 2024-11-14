@@ -8,41 +8,11 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.coordinate-label {
-    color: antiquewhite;
-    position: absolute;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
+#colorPicker {
+    border: none;
+    border-radius: 4px;
+    padding: 2px;
 }
-#minY {
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-#maxY {
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-#minX {
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-}
-#maxX {
-    top: 50%;
-    right: 5%;
-    transform: translateY(-50%);
-}
-label {
-    color: antiquewhite;
-}
-span {
-    color: antiquewhite;
-}
-#ySlider {
-    transform: rotate(-90deg);
-    transform-origin: 55% 350%; 
-    width: 200px;
-    height: 50px;
+#colorPicker::-webkit-color-swatch-wrapper {
+    padding: 0;
 }
