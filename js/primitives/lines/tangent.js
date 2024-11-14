@@ -2,6 +2,9 @@ class TangentPair {
     constructor(circle, pt) {
         
         const d = pt2pt_dist(circle.origin, pt)
+        if (d<circle.r){
+            
+        }
         const theta_offset = Math.acos(circle.r/d)
         const axis_theta = Math.atan2(pt.y,pt.x) 
 
