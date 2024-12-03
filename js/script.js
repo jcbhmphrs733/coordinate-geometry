@@ -1,8 +1,8 @@
-const circle1 = new PtRCircle(new Coor(0,0), 150);  
-const ctrl_pt = new Coor(0,5);
+const circle1 = new PtRCircle(new Coor(0,0), 85);  
+const ctrl_pt = getRandomCanvasPt();
 const midLine = new LineSegment(circle1.origin, ctrl_pt);
-const targetPt = new Coor(60,60);
-const targetPt2 = new Coor(100,100);
+const targetPt = getRandomCanvasPt();
+const targetPt2 = getRandomCanvasPt();
 
 const threshold = 15; 
 const easingFactor = .010;

@@ -6,9 +6,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="sideMenu">
+        <div id="menuTab">
+            |||
+        </div>
+        <h3>Geometry Color</h3>
+        <input type="color" id="colorPicker"/>
 
+    </div>
     <canvas id="myCanvas"></canvas>
-    <input type="color" id="colorPicker"/>
     
     <script>
         const colorInput = document.getElementById('colorPicker');
@@ -44,6 +50,10 @@
         document.addEventListener("DOMContentLoaded", () => {
             colorInput.value = randomHex();
         })
+
+        function getRandomCanvasPt() {
+            return new Coor(Math.random() * myCanvas.width - myCanvas.width / 2, Math.random() * myCanvas.height - myCanvas.height / 2)
+        }
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"></script>
