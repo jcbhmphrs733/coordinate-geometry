@@ -58,3 +58,7 @@ body {
 #colorPicker::-webkit-color-swatch-wrapper {
     padding: 0;
 }
+
+h5 {
+    color:antiquewhite;
+}
