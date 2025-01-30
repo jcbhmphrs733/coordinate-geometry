@@ -6,7 +6,7 @@ let targetPt2 = getRandomCanvasPt();
 let midline1 = new LineSegment(targetPt, circle1.origin)
 let midline2 = new LineSegment(ctrl_pt.origin, circle1.origin)
 
-const threshold = 50; 
+const threshold = 50;  
 const easingFactor = .015;
 
 function ptInCircle(pt, circle) {
@@ -25,7 +25,7 @@ function updateCanvas() {
         ctx.clearRect(-myCanvas.width/2, -myCanvas.height/2, myCanvas.width, myCanvas.height);
         
         let cPCircle = new CPCircle(circle1.origin, targetPt, ctrl_pt.origin);
-        cPCircle.draw(ctx, {color : `${color}`, dashed:true});
+        cPCircle.draw(ctx, {color : `${color}`, dashed:false});
 
         midline1.draw(ctx, {color : `${color}`})
         midline2.draw(ctx, {color : `${color}`})
@@ -38,7 +38,7 @@ function updateCanvas() {
             tanLine1.draw(ctx, {color : `${color}`})
             tanLine2.draw(ctx, {color : `${color}`})
             let tanChord = new LineSegment(tanPair.p1, tanPair.p2)
-            tanChord.draw(ctx, {color : `${color}`, dashed: true})
+            tanChord.draw(ctx, {color : `${color}`, dashed: false})
         }
         if (!ptInCircle(targetPt, circle1)) {
             let tanPair = new TanPairToPt(circle1, targetPt);
@@ -47,7 +47,7 @@ function updateCanvas() {
             tanLine1.draw(ctx, {color : `${color}`})
             tanLine2.draw(ctx, {color : `${color}`})
             let tanChord = new LineSegment(tanPair.p1, tanPair.p2)
-            tanChord.draw(ctx, {color : `${color}`, dashed: true})
+            tanChord.draw(ctx, {color : `${color}`, dashed: false})
         }
         
         if (pt2pt_dist(targetPt, targetPt2) < threshold) { 
@@ -60,10 +60,7 @@ function updateCanvas() {
         targetPt.y += (targetPt2.y - targetPt.y) * easingFactor
         ctrl_pt.origin.x += (targetPt.x - ctrl_pt.origin.x) * easingFactor;
         ctrl_pt.origin.y += (targetPt.y - ctrl_pt.origin.y) * easingFactor;
-        let growing = true
-        if(ctrl_pt.r <= 100 & growing){
-            ctrl_pt.r += 0.1
-        } 
+        
             
         circle1.draw(ctx, {color : `${color}`});
         ctrl_pt.draw(ctx, {color : `${color}`});
